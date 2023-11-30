@@ -1,6 +1,7 @@
 import re
 
 from toy_robot import action
+from toy_robot.domain.exception import InvalidPositionError, RobotHasNotBeenPlacedError
 
 
 def start_program() -> None:
@@ -16,6 +17,7 @@ def start_program() -> None:
                 action.turn_right()
             elif user_input == "MOVE":
                 action.move()
+            elif matches := re.match(r"PLACE (?P<x>\d),(?P<y>\d),(?P<facing>\w+)", user_input):
                 input_dict = matches.groupdict()
 
                 x = int(input_dict["x"])

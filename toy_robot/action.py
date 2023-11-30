@@ -24,5 +24,9 @@ def move() -> None:
     _STATE.table.move_forward(_STATE.robot)
 
 
+def place(x: int, y: int, facing: Direction) -> None:
+    _STATE.table.place(_STATE.robot, x, y, facing)
+
+
 def report() -> str:
     return _STATE.robot.report()

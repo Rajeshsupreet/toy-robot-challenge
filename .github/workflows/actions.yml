@@ -1,5 +1,13 @@
 name: Toy-ROBOT-CHALLENGE
 on: [push]
+
+env:
+    REPONAME: ${{ github.event.repository.name }}
+    WORKSPACE: ${{ github.workspace }}
+    DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+    DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+
+
 jobs:
   test:
     name: Toy-ROBOT-CHALLENGE

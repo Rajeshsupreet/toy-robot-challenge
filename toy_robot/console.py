@@ -2,6 +2,7 @@ import re
 
 from toy_robot import action
 from toy_robot.domain.exception import InvalidPositionError, RobotHasNotBeenPlacedError
+from toy_robot.domain.position import Direction
 
 
 def start_program() -> None:

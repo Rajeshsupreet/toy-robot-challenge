@@ -1,0 +1,31 @@
+name: Toy-ROBOT-CHALLENGE
+on: [push]
+
+env:
+    REPONAME: ${{ github.event.repository.name }}
+    WORKSPACE: ${{ github.workspace }}
+    DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+    DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+
+
+jobs:
+  test:
+    name: Toy-ROBOT-CHALLENGE
+    strategy:
+      matrix:
+        python-version: [3.9]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: docker login
+        run: |
+          docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+      - name: docker build and push 
+        run: |
+          docker build -f Dockerfile -t toy-robot .
+          docker tag toy-robot:latest rajeshsupreet/toy-robot:latest
+          docker push rajeshsupreet/toy-robot:latest
